@@ -1,0 +1,14 @@
+{
+  "name": "blood-bank",
+  "version": "1.0.0",
+  "description": "mern blood bank app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mahima patel",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
