@@ -4,7 +4,7 @@
     role:{
          type:String,
           required:[true,'email is required'],
-          enum:['admin','organisation','user','hospital']
+          enum:['admin','organisation','donar','hospital']
     },
     name:{
           type:String,
@@ -57,4 +57,4 @@ hospital:{
     },{timestamps:true}
  );
 
- module.exports = mongoose.model('user',userSchema)
+ module.exports = mongoose.model('users',userSchema)
