@@ -1,20 +1,9 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "server.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/server.js"
-    }
-  ],
   "env": {
-    "MONGO_URI": "@mongo_uri",
-    "JWT_SECRET": "@jwt_secret",
-    "PORT": "3000"
+    "PORT": "8080",
+    "DEV_MODE": "development",
+    "DATABASE_URL": "mongodb+srv://mahimapatel:mahima2004@cluster0.elefjvj.mongodb.net/jobportal?retryWrites=true&w=majority",
+    "JWT_SECRET": "BLOODB123"
   }
 }
