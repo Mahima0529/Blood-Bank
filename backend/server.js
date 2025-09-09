@@ -27,10 +27,24 @@ app.use(morgan('dev'))
 
 //routes
 //1 test route
-app.use('/api/v1/test', require("./routes/testRoutes"));
-app.use('/api/v1/auth', require('./routes/authRoutes'));
-app.use('/api/v1/inventory', require("./routes/inventoryRoute"));
+app.use("/api/v1/test", require("./routes/testRoutes"));
+app.use("/api/v1/auth", require("./routes/authRoutes"));
+app.use("/api/v1/inventory", require("./routes/inventoryRoutes"));
+app.use("/api/v1/analytics", require("./routes/analyticsRoutes"));
+app.use("/api/v1/admin", require("./routes/adminRoutes"));
 //port
+
+
+///STATIC FOLDER
+app.use(express.static(path.join(__dirname, "./client/build")));
+
+//STATIS ROUTES
+app.get("*", function(req,res){
+    res.sendFile(path.join(__dirname, "./client/build/index.html"));
+})
+
+
+
 const PORT= process.env.PORT|| 8080;
 
 
