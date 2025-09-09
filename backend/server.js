@@ -1,63 +1,52 @@
 const express = require("express");
-const dotenv = require('dotenv')
-const colors = require('colors')
-const morgan= require('morgan')
-const cors= require('cors');
+const dotenv = require('dotenv');
+const colors = require('colors');
+const morgan = require('morgan');
+const cors = require('cors');
+const path = require('path'); // <-- you missed importing path
 const connectDB = require("./config/db");
-const jwt =require('jsonwebtoken')
-//dot config
+
+// Load env vars
 dotenv.config();
 
-//mongodb coonection
+// Connect to MongoDB
 connectDB();
 
-//rest object
-const app= express();
+// Initialize Express
+const app = express();
 
-//middlewares
-app.use(express.json())
+// Middlewares
+app.use(express.json());
 app.use(cors({
-    origin :["https://donatehub.netlify.app"]
+    origin: ["https://donatehub.netlify.app"] // your frontend URL
 }));
-app.use(morgan('dev'))
-   
+app.use(morgan('dev'));
 
-
-
-
-//routes
-//1 test route
+// API Routes
 app.use("/api/v1/test", require("./routes/testRoutes"));
 app.use("/api/v1/auth", require("./routes/authRoutes"));
 app.use("/api/v1/inventory", require("./routes/inventoryRoutes"));
 app.use("/api/v1/analytics", require("./routes/analyticsRoutes"));
 app.use("/api/v1/admin", require("./routes/adminRoutes"));
-//port
 
+// Serve static React build
+app.use(express.static(path.join(__dirname, "client/build")));
 
-///STATIC FOLDER
-app.use(express.static(path.join(__dirname, "./client/build")));
-
-//STATIS ROUTES
-app.get("*", function(req,res){
-    res.sendFile(path.join(__dirname, "./client/build/index.html"));
-})
-
-
-
-const PORT= process.env.PORT|| 8080;
-
-
-app.get('/',(req,res)=>{
-    res.send({
-        activeStatus:true,
-        error:false,
-    })
-})
-//listen
-app.listen(PORT,()=>{
-    console.log(`Node Server Runiing In ${process.env.DEV_MODE} ModeOn Port ${process.env.PORT}`.bgMagenta.white
-
-    );
+// React routing fallback (for SPA)
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, "client/build", "index.html"));
 });
 
+// Optional root route
+app.get('/', (req, res) => {
+    res.send({
+        activeStatus: true,
+        error: false,
+    });
+});
+
+// Start server
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+    console.log(`Node Server Running in ${process.env.DEV_MODE} Mode on Port ${PORT}`.bgMagenta.white);
+});
