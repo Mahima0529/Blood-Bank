@@ -49,7 +49,9 @@ const ProtectedRoute = ({ children }) => {
   // Step 2: Get user data from Redux (optional but more reliable)
   const { user } = useSelector((state) => state.auth);
 
+
   // Step 3: Function to check if token is valid and get user
+// eslint-disable-next-line no-unused-vars
   const getUser = async () => {
     try {
       const { data } = await API.get('/auth/currentuser'); // Backend check

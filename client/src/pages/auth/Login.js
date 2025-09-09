@@ -5,6 +5,7 @@ import Spinner from "../../components/Shared/Spinner";
 
 
 const Login=()=>{
+  // eslint-disable-next-line no-unused-vars
 const {loading, error}=useSelector((state)=> state.auth);
   return (
         <>
