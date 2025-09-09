@@ -31,6 +31,13 @@ app.use('/api/v1/inventory', require("./routes/inventoryRoute"));
 //port
 const PORT= process.env.PORT|| 8080;
 
+
+app.get('/',(req,res)=>{
+    res.send({
+        activeStatus:true,
+        error:false,
+    })
+})
 //listen
 app.listen(PORT,()=>{
     console.log(`Node Server Runiing In ${process.env.DEV_MODE} ModeOn Port ${process.env.PORT}`.bgMagenta.white
