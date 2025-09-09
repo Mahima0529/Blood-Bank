@@ -16,7 +16,9 @@ const app= express();
 
 //middlewares
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+    origin :["https://donatehub.netlify.app"]
+}));
 app.use(morgan('dev'))
    
 
